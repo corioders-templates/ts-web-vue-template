@@ -41,7 +41,7 @@ const webpack = {
 	output: {
 		clean: true,
 		path: paths.out,
-		filename: '[name].js',
+		filename: `${config.IS_PRODUCTION && !config.IS_ANALYZE ? '[contenthash]' : '[name]'}.js`,
 		publicPath: '/',
 	},
 
