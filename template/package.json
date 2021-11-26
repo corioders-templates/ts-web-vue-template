@@ -10,14 +10,14 @@
 		"debug": "yarn run debug:dev",
 		"build": "yarn run build:prod",
 		"release": "yarn run build && yarn publish --access public --non-interactive",
-		"watch:dev": "cross-env WATCH=true NODE_ENV=development && webpack serve --no-stats --config ./config/webpack.dev.js",
-		"watch:prod": "cross-env WATCH=true NODE_ENV=production && webpack serve --no-stats --config ./config/webpack.prod.js",
+		"watch:dev": "cross-env WATCH=true NODE_ENV=development webpack serve --no-stats --config ./config/webpack.dev.js",
+		"watch:prod": "cross-env WATCH=true NODE_ENV=production webpack serve --no-stats --config ./config/webpack.prod.js",
 		"debug:dev": "cross-env DEBUG=true yarn run watch:dev",
 		"debug:prod": "cross-env DEBUG=true yarn run watch:prod",
 		"analyze:dev": "cross-env ANALYZE=true yarn run build:dev",
 		"analyze:prod": "cross-env ANALYZE=true yarn run build:prod",
-		"build:dev": "cross-env NODE_ENV=development && webpack --config ./config/webpack.dev.js",
-		"build:prod": "cross-env NODE_ENV=production && webpack --config ./config/webpack.prod.js"
+		"build:dev": "cross-env NODE_ENV=development webpack --config ./config/webpack.dev.js",
+		"build:prod": "cross-env NODE_ENV=production webpack --config ./config/webpack.prod.js"
 	},
 	"devDependencies": {
 		"@soda/friendly-errors-webpack-plugin": "^1.8.1",
