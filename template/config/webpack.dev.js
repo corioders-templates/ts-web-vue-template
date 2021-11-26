@@ -6,7 +6,7 @@ const common = require('./webpack.common.js');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const webpackConfig = {
-	...common.webpack,
+	...common.webpackConfig,
 	mode: 'development',
 	devtool: 'source-map',
 };

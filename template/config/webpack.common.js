@@ -33,7 +33,7 @@ options.ts = {
 const aliases = require(path.resolve(config.CONFIG_PATH, 'alias.json'));
 for (const key in aliases) aliases[key] = path.resolve(config.ROOT_PATH, aliases[key]);
 
-const webpack = {
+const webpackConfig = {
 	context: config.ROOT_PATH,
 	entry: path.resolve(paths.src, 'index.ts'),
 
@@ -183,6 +183,6 @@ const webpack = {
 };
 
 module.exports = {
-	webpack,
+	webpackConfig,
 	paths,
 };

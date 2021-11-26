@@ -5,8 +5,8 @@ const common = require('./webpack.common.js');
 
 const JsMinimizerPlugin = require('terser-webpack-plugin');
 
-module.exports = {
-	...common.webpack,
+const webpackConfig = {
+	...common.webpackConfig,
 	mode: 'production',
 	devtool: config.IS_DEBUG ? 'source-map' : false,
 
@@ -14,5 +14,7 @@ module.exports = {
 		minimizer: [new JsMinimizerPlugin({ extractComments: false, terserOptions: { toplevel: true, compress: { passes: 10 } } })],
 	},
 
-	devServer: common.webpack.devServer,
+	devServer: common.webpackConfig.devServer,
 };
+
+module.exports = webpackConfig;
