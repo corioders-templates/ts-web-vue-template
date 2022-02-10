@@ -1,0 +1,18 @@
+{
+	"configurations": [
+		{
+			"name": "Browser sync web app debugger",
+			"request": "launch",
+			"type": "chrome",
+			"webRoot": "${workspaceFolder}",
+			"url": "http://localhost:8080"
+		},
+		{
+			"name": "Main web app debugger",
+			"request": "launch",
+			"type": "chrome",
+			"webRoot": "${workspaceFolder}",
+			"url": "http://localhost:8081"
+		},
+	]
+}

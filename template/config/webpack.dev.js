@@ -11,8 +11,6 @@ const webpackConfig = {
 	devtool: 'source-map',
 };
 
-if (config.IS_WATCH) {
-	webpackConfig.plugins.push(new HtmlWebpackPlugin());
-}
+webpackConfig.plugins.push(new HtmlWebpackPlugin(common.pluginsOptions.htmlWebpackPlugin));
 
 module.exports = webpackConfig;

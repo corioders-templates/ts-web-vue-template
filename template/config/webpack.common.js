@@ -3,6 +3,7 @@ const path = require('path');
 const config = require('./config.js');
 
 const { DefinePlugin } = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
@@ -24,15 +25,29 @@ const paths = {
 	babelConfig: path.resolve(config.CONFIG_PATH, 'babel.config.js'),
 };
 
+const pluginsOptions = {};
+pluginsOptions.htmlWebpackPlugin = {
+	favicon: path.resolve(config.ROOT_PATH, 'src/public/favicon.ico'),
+	template: path.resolve(config.ROOT_PATH, 'src/public/index.html'),
+};
+
 const loaderOptions = {};
 loaderOptions.babel = {
 	configFile: paths.babelConfig,
 	cacheDirectory: true,
 };
+loaderOptions.postcss = {
+	postcssOptions: { plugins: ['postcss-preset-env'] },
+};
+loaderOptions.sass = {
+	additionalData: `@use './scss/global/*.scss' as *;`,
+	sassOptions: { includePaths: [paths.src], importer: require('node-sass-glob-importer')() },
+};
 
 const aliases = require(path.resolve(config.CONFIG_PATH, 'alias.json'));
 for (const key in aliases) aliases[key] = path.resolve(config.ROOT_PATH, aliases[key]);
 
+const filename = `${config.IS_PRODUCTION && !config.IS_ANALYZE ? '[contenthash]' : '[name]'}.js`;
 const webpackConfig = {
 	context: config.ROOT_PATH,
 	entry: path.resolve(paths.src, 'index.ts'),
@@ -41,7 +56,7 @@ const webpackConfig = {
 	output: {
 		clean: true,
 		path: paths.out,
-		filename: `${config.IS_PRODUCTION && !config.IS_ANALYZE ? '[contenthash]' : '[name]'}.js`,
+		filename,
 		publicPath: '/',
 	},
 
@@ -64,11 +79,27 @@ const webpackConfig = {
 			// =========================================================================
 			// loaders
 			{
-				test: /\.ts$/,
+				test: /\.(ts|js)$/,
+				exclude: /node_modules\/(core-js|css-loader)/,
 				use: [
 					{
 						loader: 'babel-loader',
 						options: loaderOptions.babel,
+					},
+				],
+			},
+			{
+				test: /\.s?css$/,
+				use: [
+					MiniCssExtractPlugin.loader,
+					'css-loader',
+					{
+						loader: 'postcss-loader',
+						options: loaderOptions.postcss,
+					},
+					{
+						loader: 'sass-loader',
+						options: loaderOptions.sass,
 					},
 				],
 			},
@@ -80,6 +111,11 @@ const webpackConfig = {
 
 		new DefinePlugin({
 			__IS_PRODUCTION__: config.IS_PRODUCTION,
+		}),
+
+		new MiniCssExtractPlugin({
+			filename: `${filename}.css`,
+			chunkFilename: `${filename}.css`,
 		}),
 
 		new ForkTsCheckerWebpackPlugin({
@@ -192,4 +228,6 @@ const webpackConfig = {
 module.exports = {
 	webpackConfig,
 	paths,
+
+	pluginsOptions,
 };

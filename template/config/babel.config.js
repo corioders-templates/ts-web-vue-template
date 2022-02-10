@@ -4,6 +4,17 @@ const config = require('./config.js');
 
 module.exports = {
 	sourceType: 'unambiguous',
+	presets: [
+		[
+			'@babel/preset-env',
+			{
+				useBuiltIns: 'usage',
+				corejs: '3.21',
+				bugfixes: true,
+				configPath: config.ROOT_PATH,
+			},
+		],
+	],
 
 	plugins: [['@babel/plugin-transform-typescript', { optimizeConstEnums: true }], '@babel/plugin-transform-runtime'],
 };
