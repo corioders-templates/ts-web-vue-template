@@ -22,8 +22,8 @@ const paths = {
 	tsConfig: path.resolve(config.ROOT_PATH, 'tsconfig.json'),
 };
 
-const options = {};
-options.ts = {
+const loaderOptions = {};
+loaderOptions.ts = {
 	useCaseSensitiveFileNames: true,
 	onlyCompileBundledFiles: true,
 	configFile: paths.tsConfig,
@@ -68,7 +68,7 @@ const webpackConfig = {
 				use: [
 					{
 						loader: 'ts-loader',
-						options: options.ts,
+						options: loaderOptions.ts,
 					},
 				],
 			},
