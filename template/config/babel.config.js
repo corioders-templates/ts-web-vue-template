@@ -5,5 +5,5 @@ const config = require('./config.js');
 module.exports = {
 	sourceType: 'unambiguous',
 
-	plugins: [['@babel/plugin-transform-typescript', { optimizeConstEnums: true }]],
+	plugins: [['@babel/plugin-transform-typescript', { optimizeConstEnums: true }], '@babel/plugin-transform-runtime'],
 };

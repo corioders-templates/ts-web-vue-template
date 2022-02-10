@@ -21,6 +21,7 @@
 	},
 	"devDependencies": {
 		"@babel/core": "7.17.2",
+		"@babel/plugin-transform-runtime": "7.17.0",
 		"@babel/plugin-transform-typescript": "7.16.8",
 		"@soda/friendly-errors-webpack-plugin": "1.8.1",
 		"@trivago/prettier-plugin-sort-imports": "3.1.1",
@@ -44,5 +45,8 @@
 		"webpack-cli": "4.9.1",
 		"webpack-dev-server": "4.6.0",
 		"webpackbar": "5.0.2"
+	},
+	"dependencies": {
+		"@babel/runtime": "7.17.2"
 	}
 }
