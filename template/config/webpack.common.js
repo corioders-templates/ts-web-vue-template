@@ -37,7 +37,10 @@ loaderOptions.babel = {
 	cacheDirectory: true,
 };
 loaderOptions.postcss = {
-	postcssOptions: { plugins: ['postcss-preset-env'] },
+	postcssOptions: {
+		syntax: 'postcss-scss',
+		plugins: ['stylelint', 'postcss-preset-env'],
+	},
 };
 loaderOptions.sass = {
 	additionalData: `@use './scss/global/*.scss' as *;`,
@@ -94,12 +97,12 @@ const webpackConfig = {
 					MiniCssExtractPlugin.loader,
 					'css-loader',
 					{
-						loader: 'postcss-loader',
-						options: loaderOptions.postcss,
-					},
-					{
 						loader: 'sass-loader',
 						options: loaderOptions.sass,
+					},
+					{
+						loader: 'postcss-loader',
+						options: loaderOptions.postcss,
 					},
 				],
 			},
