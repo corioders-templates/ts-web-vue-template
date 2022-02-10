@@ -4,6 +4,7 @@ const config = require('./config.js');
 
 const { DefinePlugin } = require('webpack');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
@@ -20,14 +21,13 @@ const paths = {
 
 	eslintConfig: path.resolve(config.ROOT_PATH, '.eslintrc.js'),
 	tsConfig: path.resolve(config.ROOT_PATH, 'tsconfig.json'),
+	babelConfig: path.resolve(config.CONFIG_PATH, 'babel.config.js'),
 };
 
 const loaderOptions = {};
-loaderOptions.ts = {
-	useCaseSensitiveFileNames: true,
-	onlyCompileBundledFiles: true,
-	configFile: paths.tsConfig,
-	appendTsSuffixTo: [/\.vue$/],
+loaderOptions.babel = {
+	configFile: paths.babelConfig,
+	cacheDirectory: true,
 };
 
 const aliases = require(path.resolve(config.CONFIG_PATH, 'alias.json'));
@@ -67,8 +67,8 @@ const webpackConfig = {
 				test: /\.ts$/,
 				use: [
 					{
-						loader: 'ts-loader',
-						options: loaderOptions.ts,
+						loader: 'babel-loader',
+						options: loaderOptions.babel,
 					},
 				],
 			},
@@ -80,6 +80,13 @@ const webpackConfig = {
 
 		new DefinePlugin({
 			__IS_PRODUCTION__: config.IS_PRODUCTION,
+		}),
+
+		new ForkTsCheckerWebpackPlugin({
+			typescript: {
+				memoryLimit: 4096,
+				context: config.ROOT_PATH,
+			},
 		}),
 
 		new ESLintPlugin({
