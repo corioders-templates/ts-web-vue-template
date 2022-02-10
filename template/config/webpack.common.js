@@ -90,7 +90,7 @@ const webpackConfig = {
 		}),
 
 		new ESLintPlugin({
-			extensions: ['js', 'ts', 'vue'],
+			extensions: ['js', 'ts'],
 			lintDirtyModulesOnly: true,
 		}),
 
