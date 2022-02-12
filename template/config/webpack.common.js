@@ -3,6 +3,7 @@ const path = require('path');
 const config = require('./config.js');
 
 const { DefinePlugin } = require('webpack');
+const { VueLoaderPlugin } = require('vue-loader');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
@@ -45,6 +46,9 @@ loaderOptions.postcss = {
 loaderOptions.sass = {
 	additionalData: `@use './scss/global/*.scss' as *;`,
 	sassOptions: { includePaths: [paths.src], importer: require('node-sass-glob-importer')() },
+};
+loaderOptions.vue = {
+	exposeFilename: config.IS_DEBUG || !config.IS_PRODUCTION,
 };
 
 const aliases = require(path.resolve(config.CONFIG_PATH, 'alias.json'));
@@ -114,14 +118,23 @@ const webpackConfig = {
 					},
 				],
 			},
+			{
+				test: /\.vue$/,
+				loader: 'vue-loader',
+				options: loaderOptions.vue,
+			},
 		],
 	},
 
 	plugins: [
 		...(config.IS_ANALYZE ? [new BundleAnalyzerPlugin()] : []),
 
+		new VueLoaderPlugin(),
+
 		new DefinePlugin({
 			__IS_PRODUCTION__: config.IS_PRODUCTION,
+			__VUE_OPTIONS_API__: true,
+			__VUE_PROD_DEVTOOLS__: false,
 		}),
 
 		new MiniCssExtractPlugin({
@@ -133,11 +146,17 @@ const webpackConfig = {
 			typescript: {
 				memoryLimit: 4096,
 				context: config.ROOT_PATH,
+				extensions: {
+					vue: {
+						enabled: true,
+						compiler: '@vue/compiler-sfc',
+					},
+				},
 			},
 		}),
 
 		new ESLintPlugin({
-			extensions: ['js', 'ts'],
+			extensions: ['js', 'ts', 'vue'],
 			lintDirtyModulesOnly: true,
 		}),
 
