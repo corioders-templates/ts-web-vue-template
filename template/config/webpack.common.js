@@ -80,6 +80,14 @@ const webpackConfig = {
 	module: {
 		rules: [
 			// =========================================================================
+			// asset
+			{
+				// Include all assets listed in types/assets.d.ts
+				test: /assets\/.*(\.txt|\.json|\.apng|\.gif|\.jpg|\.jpeg|\.jfif|\.pjpeg|\.pjp|\.png|\.svg|\.webp|\.bmp|\.ico|\.cur|\.tif|\.tiff|\.wav|\.wave|\.mp3|\.aac|\.caf|\.flac|\.mp4|\.webm|\.3gp|\.dat|\.mpg|\.mpeg|\.mp1|\.mp2|\.mp3|\.m1v|\.m1a|\.m2a|\.mpa|\.mpv|\.mov|\.ogg|\.ogv|\.oga|\.ogx|\.ogm|\.spx|\.opus)/,
+				type: 'asset',
+			},
+
+			// =========================================================================
 			// loaders
 			{
 				test: /\.(ts|js)$/,
