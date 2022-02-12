@@ -3,7 +3,9 @@
 		"incremental": true,
 
 		"target": "ESNext",
-		"types": [],
+		"types": [
+			"./node_modules/@types/webpack-env"
+		],
     "lib": [
 			"ESNext",
 			"DOM"
