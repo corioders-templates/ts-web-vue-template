@@ -2,6 +2,7 @@
   "compilerOptions": {
 		"incremental": true,
 
+		"module": "ESNext",
 		"target": "ESNext",
 		"types": [
 			"./node_modules/@types/webpack-env"
