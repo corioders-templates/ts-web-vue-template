@@ -6,6 +6,7 @@ const common = require('./webpack.common.js');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const JsMinimizerPlugin = require('terser-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const webpackConfig = {
 	...common.webpackConfig,
@@ -13,7 +14,10 @@ const webpackConfig = {
 	devtool: config.IS_DEBUG ? 'source-map' : false,
 
 	optimization: {
-		minimizer: [new JsMinimizerPlugin({ extractComments: false, terserOptions: { toplevel: true, compress: { passes: 10 } } })],
+		minimizer: [
+			new JsMinimizerPlugin({ extractComments: false, terserOptions: { toplevel: true, compress: { passes: 10 } } }),
+			new CssMinimizerPlugin({ minimizerOptions: { preset: ['default', { discardComments: { removeAll: true } }] } }),
+		],
 	},
 
 	devServer: common.webpackConfig.devServer,
