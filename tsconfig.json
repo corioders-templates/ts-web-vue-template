@@ -11,7 +11,7 @@
       "ESNext",
     ],
 
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "rootDir": "./src",
     "paths": {
       "@/*": [
