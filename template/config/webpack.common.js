@@ -114,12 +114,12 @@ const webpackConfig = {
 			 * @param {import('webpack').Compiler} compiler
 			 */
 			apply(compiler) {
+				let chalk;
+        
 				// Disable webpack-dev-server output.
 				compiler.hooks.infrastructureLog.tap(this.PLUGIN_NAME, (name, type, args) => {
 					if (name == 'webpack-dev-server') return true;
 				});
-
-				const chalk = require('chalk');
 
 				const friendlyErrorsOutput = require('@soda/friendly-errors-webpack-plugin/src/output');
 				class FriendlyErrorsWebpackPluginModified extends FriendlyErrorsWebpackPlugin {
@@ -153,9 +153,13 @@ const webpackConfig = {
 				}
 
 				let once = false;
-				const addLogging = (isWatching) => {
+				const addLogging = async (isWatching) => {
 					if (once) return;
 					once = true;
+
+					// Load chalk.
+					const chalkESM = await import('chalk');
+					chalk = chalkESM.default;
 
 					const webpackBar = new WebpackBarModified();
 					webpackBar._ensureState();
@@ -167,8 +171,8 @@ const webpackConfig = {
 					}
 				};
 
-				compiler.hooks.watchRun.tap(this.PLUGIN_NAME, addLogging.bind(undefined, true));
-				compiler.hooks.beforeRun.tap(this.PLUGIN_NAME, addLogging.bind(undefined, false));
+				compiler.hooks.watchRun.tapPromise(this.PLUGIN_NAME, addLogging.bind(undefined, true));
+				compiler.hooks.beforeRun.tapPromise(this.PLUGIN_NAME, addLogging.bind(undefined, false));
 			},
 		},
 	],
