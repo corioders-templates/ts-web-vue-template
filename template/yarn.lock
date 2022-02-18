@@ -983,7 +983,7 @@
     "@babel/helper-validator-identifier" "^7.16.7"
     to-fast-properties "^2.0.0"
 
-"@corioders/vueui@^0.0.11":
+"@corioders/vueui@0.0.11":
   version "0.0.11"
   resolved "https://registry.yarnpkg.com/@corioders/vueui/-/vueui-0.0.11.tgz#7e26dbb5d4c192b732998c3316f51ff0983b451b"
   integrity sha512-ta0hwDEtbrrSCEL1qYGZN+7ig6N3Q99RS+a8Aa4uI9rwNsL1Jo9PGwkfYASZByv6erTTwM8DvOpUEpopMNgx4g==
