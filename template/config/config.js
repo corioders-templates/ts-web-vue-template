@@ -37,9 +37,8 @@ function GET_ROOT_PATH() {
 function GET_MORE(config_path) {
 	const base = path.resolve(config_path, 'more');
 	return {
-		WORKAROUNDS_PATH: path.resolve(base, 'workarounds'),
-		LOADERS_PATH: path.resolve(base, 'loaders'),
-		BROWSER_SYNC_PLUGINS_PATH: path.resolve(base, 'browserSyncPlugins'),
+		BROWSER_SYNC_PATH: path.resolve(base, 'browserSync'),
+		WEBPACK_PATH: path.resolve(base, 'webpack'),
 	};
 }
 
