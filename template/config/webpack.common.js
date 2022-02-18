@@ -13,7 +13,8 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin');
 const WebpackBar = require('webpackbar');
 
-const browserSyncReloadPlugin = require(path.resolve(config.MORE.BROWSER_SYNC_PLUGINS_PATH, 'reloadPlugin'));
+const browserSyncReloadPlugin = require(path.resolve(config.MORE.BROWSER_SYNC_PATH, 'reloadPlugin'));
+const OnlyWebpackErrorsInForkTsCheckerWebpackPlugin = require(path.resolve(config.MORE.WEBPACK_PATH, 'onlyWebpackErrorsInForkTsCheckerWebpackPlugin.js'));
 
 const paths = {
 	src: path.resolve(config.ROOT_PATH, 'src'),
@@ -135,6 +136,7 @@ const webpackConfig = {
 				context: config.ROOT_PATH,
 			},
 		}),
+		new OnlyWebpackErrorsInForkTsCheckerWebpackPlugin(),
 
 		new ESLintPlugin({
 			extensions: ['js', 'ts'],
@@ -162,7 +164,7 @@ const webpackConfig = {
 			 */
 			apply(compiler) {
 				let chalk;
-        
+
 				// Disable webpack-dev-server output.
 				compiler.hooks.infrastructureLog.tap(this.PLUGIN_NAME, (name, type, args) => {
 					if (name == 'webpack-dev-server') return true;
