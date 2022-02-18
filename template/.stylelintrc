@@ -1,10 +1,9 @@
 {
-	"extends": [
-		"stylelint-config-standard-scss"
-	],
+	"extends": ["stylelint-config-standard-scss"],
 	"rules": {
 		"no-missing-end-of-source-newline": null,
 		"no-empty-first-line": null,
-		"indentation": "tab"
+		"indentation": "tab",
+		"string-quotes": "single"
 	}
 }
