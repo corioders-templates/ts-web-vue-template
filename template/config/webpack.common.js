@@ -45,8 +45,7 @@ loaderOptions.postcss = {
 	},
 };
 loaderOptions.sass = {
-	additionalData: `@use './scss/global/*.scss' as *;`,
-	sassOptions: { includePaths: [paths.src], importer: require('node-sass-glob-importer')() },
+	webpackImporter: true,
 };
 loaderOptions.vue = {
 	exposeFilename: config.IS_DEBUG || !config.IS_PRODUCTION,
