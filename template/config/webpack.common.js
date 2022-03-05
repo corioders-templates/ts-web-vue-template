@@ -44,8 +44,7 @@ loaderOptions.postcss = {
 	},
 };
 loaderOptions.sass = {
-	additionalData: `@use './scss/global/*.scss' as *;`,
-	sassOptions: { includePaths: [paths.src], importer: require('node-sass-glob-importer')() },
+	webpackImporter: true,
 };
 
 const aliases = require(path.resolve(config.CONFIG_PATH, 'alias.json'));
