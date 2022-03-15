@@ -6052,6 +6052,17 @@ stylelint-scss@^4.0.0:
     postcss-selector-parser "^6.0.6"
     postcss-value-parser "^4.1.0"
 
+stylelint-webpack-plugin@3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/stylelint-webpack-plugin/-/stylelint-webpack-plugin-3.1.1.tgz#00df2e39f118aebaba50ffd6abc357e94ad87f07"
+  integrity sha512-0C7MOb82Hc97DYvdR7Y29P4ZXFXOBNelyr9nPAEh2iel0FQ77KhyTWBsELX4b8fQQhNjvKVSsAgjQI5FeVojgA==
+  dependencies:
+    globby "^11.0.4"
+    jest-worker "^27.3.1"
+    micromatch "^4.0.4"
+    normalize-path "^3.0.0"
+    schema-utils "^4.0.0"
+
 stylelint@14.5.0:
   version "14.5.0"
   resolved "https://registry.yarnpkg.com/stylelint/-/stylelint-14.5.0.tgz#d94252027164bc918303a6b782652931421d8871"

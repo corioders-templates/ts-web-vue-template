@@ -8,6 +8,9 @@
 		"indentation": "tab",
 		"string-quotes": "single",
 		"selector-class-pattern": null,
-		"selector-pseudo-class-no-unknown": null
+		"selector-pseudo-class-no-unknown": null,
+		"declaration-block-trailing-semicolon": null,
+		"scss/at-mixin-pattern": "^[A-Z][a-z]+(?:[A-Z][a-z]+)*$",
+		"scss/dollar-variable-pattern": "^[a-z]+(?:[A-Z][a-z]+)*$"
 	}
 }
