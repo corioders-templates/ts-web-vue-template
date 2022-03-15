@@ -1,0 +1,4 @@
+// Special file for eslint.
+{
+	"extends": "./tsconfig.json"
+}
